@@ -68,15 +68,6 @@ public struct CALCButtonTypeStyle {
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
     }
-
-    var width: CGFloat {
-        let side = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.width : UIScreen.main.bounds.height - 100
-        return (side - 5 * 12) / 5
-    }
-    
-    var height: CGFloat {
-        return (UIScreen.main.bounds.width  - 100) * 0.2
-    }
 }
 
 public struct CALCButtonViewModel: Identifiable, Hashable {

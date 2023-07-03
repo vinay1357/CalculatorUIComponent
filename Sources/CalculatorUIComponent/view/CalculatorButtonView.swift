@@ -9,6 +9,8 @@ import SwiftUI
 
 public struct CalculatorButtonView: View {
     let viewModel: CALCButtonViewModel
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     public init(viewModel: CALCButtonViewModel) {
         self.viewModel = viewModel
@@ -20,11 +22,25 @@ public struct CalculatorButtonView: View {
         }, label: {
             Text(viewModel.title)
                 .font(viewModel.style.font)
-                .frame(width: viewModel.style.width, height: viewModel.style.width)
+                .frame(width: self.width, height: self.height)
+                .frame(maxHeight: .infinity)
                 .background(viewModel.style.backgroundColor)
                 .foregroundColor(viewModel.style.foregroundColor)
                 .cornerRadius(viewModel.style.cornerRadius)
         })
+    }
+    
+    var width: CGFloat {
+        
+        let useWidth =  UIScreen.main.bounds.width < UIScreen.main.bounds.height
+        let side = useWidth ? UIScreen.main.bounds.width : UIScreen.main.bounds.height - 100
+        
+        let factor =  verticalSizeClass == .regular && horizontalSizeClass == .compact  ? 4.0 : 5.0
+        return (side - (factor * 12.0)) / factor
+    }
+    
+    var height: CGFloat {
+        return self.width
     }
 }
 
